@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useData } from '../../context/DataContext';
 
 const ConsultationForm = ({ patient, patientProfile, appointment, onEnd }) => {
+  const { updateAppointment } = useData();
   const [formData, setFormData] = useState({
     symptoms: appointment?.reason || '',
     diagnosis: '',
@@ -18,21 +20,17 @@ const ConsultationForm = ({ patient, patientProfile, appointment, onEnd }) => {
     }
   };
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     // Save consultation data
-    const all = JSON.parse(localStorage.getItem("appointments")) || [];
-    const index = all.findIndex(a => a.id === appointment?.id);
-    if (index > -1) {
-      all[index] = {
-        ...all[index],
+    if (appointment?.id) {
+      await updateAppointment(appointment.id, {
         status: 'Completed',
         symptoms: formData.symptoms,
         diagnosis: formData.diagnosis,
         notes: formData.notes,
         advice: formData.advice,
         prescription: prescription
-      };
-      localStorage.setItem("appointments", JSON.stringify(all));
+      });
     }
     alert("Consultation Completed and Saved!");
     onEnd();

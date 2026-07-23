@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useData } from '../../context/DataContext';
 
 const MedicalRecords = ({ user }) => {
+  const { appointments } = useData();
   const [completedAppointments, setCompletedAppointments] = useState([]);
 
   useEffect(() => {
-    const allAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
-    setCompletedAppointments(allAppointments.filter(a => a.email === user.email && a.status === 'Completed'));
-  }, [user]);
+    setCompletedAppointments(appointments.filter(a => a.email === user.email && a.status === 'Completed'));
+  }, [user, appointments]);
 
   return (
     <div className="card shadow-sm border-0 rounded-4 p-4">
