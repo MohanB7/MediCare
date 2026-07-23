@@ -1,0 +1,1 @@
+const axios = require('axios'); axios.post('http://localhost:5000/api/appointments', { name: 'Test', email: 'test@test.com', phone: '1234567890', department: 'Cardiology', doctor: 'Test Doctor', date: '2026-07-23', time: '10:00' }).then(console.log).catch(e => console.error(e.response ? e.response.data : e));

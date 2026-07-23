@@ -13,6 +13,8 @@ const appointmentSchema = new mongoose.Schema({
     dateOfBirth: { type: Date },
     department: { type: String, required: true, trim: true },
     doctor: { type: String, required: true, trim: true },
+    doctorId: { type: String, trim: true },
+    patientId: { type: String, trim: true },
     date: { type: String, required: true }, // Keeping as string for frontend compatibility, but could be Date
     time: { type: String, required: true },
     reason: { type: String, trim: true },

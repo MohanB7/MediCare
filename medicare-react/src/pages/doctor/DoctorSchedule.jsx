@@ -14,7 +14,9 @@ const DoctorSchedule = ({ user, onSelectPatient }) => {
 
   const filteredAppointments = appointments.filter(a => {
     // Only show appointments intended for this specific doctor
-    if (a.doctor !== user.name && a.doctorId !== user.id) return false;
+    const matchByName = a.doctor === user.name || a.doctor === `Dr. ${user.name}`;
+    const matchById = a.doctorId && (a.doctorId === user.id || a.doctorId === user._id);
+    if (!matchByName && !matchById) return false;
     
     if (a.status === 'Admitted') return false; // Hide admitted patients
     if (filter === 'Today') return a.date === todayStr;

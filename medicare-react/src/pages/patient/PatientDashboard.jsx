@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PatientProfile from './PatientProfile';
-import DoctorSearch from './DoctorSearch';
 import PatientAppointments from './PatientAppointments';
 import MedicalRecords from './MedicalRecords';
 
@@ -11,8 +10,6 @@ const PatientDashboard = ({ user }) => {
     switch (activeTab) {
       case 'profile':
         return <PatientProfile user={user} />;
-      case 'search':
-        return <DoctorSearch user={user} />;
       case 'appointments':
         return <PatientAppointments user={user} />;
       case 'records':
@@ -38,9 +35,6 @@ const PatientDashboard = ({ user }) => {
             <div className="nav flex-column nav-pills teal-nav" role="tablist" aria-orientation="vertical">
               <button className={`nav-link text-start py-3 mb-2 ${activeTab === 'appointments' ? 'active' : ''}`} onClick={() => setActiveTab('appointments')}>
                 <i className="fa-solid fa-calendar-list me-2 w-20px text-center"></i> My Appointments
-              </button>
-              <button className={`nav-link text-start py-3 mb-2 ${activeTab === 'search' ? 'active' : ''}`} onClick={() => setActiveTab('search')}>
-                <i className="fa-solid fa-user-doctor me-2 w-20px text-center"></i> Search & Book
               </button>
               <button className={`nav-link text-start py-3 mb-2 ${activeTab === 'records' ? 'active' : ''}`} onClick={() => setActiveTab('records')}>
                 <i className="fa-solid fa-file-medical me-2 w-20px text-center"></i> Medical Records
