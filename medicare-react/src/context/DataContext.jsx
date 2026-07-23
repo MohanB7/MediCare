@@ -13,13 +13,13 @@ export const DataProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         // Fetch Doctors (Users with role doctor - since user changed enum to lowercase)
-        const usersResponse = await axios.get('http://localhost:5000/api/users');
+        const usersResponse = await axios.get('https://medicare-1-nggy.onrender.com/api/users');
         // Filter on the frontend just to be safe with case sensitivity, or let backend return all and filter
         const mappedUsers = usersResponse.data.map(u => ({ ...u, name: u.fullName, id: u._id }));
         setUsers(mappedUsers);
 
         // Fetch Appointments
-        const appointmentsResponse = await axios.get('http://localhost:5000/api/appointments');
+        const appointmentsResponse = await axios.get('https://medicare-1-nggy.onrender.com/api/appointments');
         const mappedAppointments = appointmentsResponse.data.map(a => ({ ...a, id: a._id }));
         setAppointments(mappedAppointments);
       } catch (error) {
@@ -37,7 +37,7 @@ export const DataProvider = ({ children }) => {
 
   const addAppointment = async (newAppointment) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/appointments', newAppointment);
+      const response = await axios.post('https://medicare-1-nggy.onrender.com/api/appointments', newAppointment);
       const appt = response.data.appointment;
       setAppointments([...appointments, { ...appt, id: appt._id }]);
     } catch (error) {
@@ -47,7 +47,7 @@ export const DataProvider = ({ children }) => {
 
   const updateAppointment = async (id, updatedData) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/appointments/${id}`, updatedData);
+      const response = await axios.put(`https://medicare-1-nggy.onrender.com/api/appointments/${id}`, updatedData);
       const appt = response.data.appointment;
       setAppointments(appointments.map(a => a.id === id || a._id === id ? { ...appt, id: appt._id } : a));
     } catch (error) {
@@ -57,7 +57,7 @@ export const DataProvider = ({ children }) => {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`);
+      await axios.delete(`https://medicare-1-nggy.onrender.com/api/users/${id}`);
       setUsers(users.filter(u => u.id !== id && u._id !== id));
     } catch (error) {
       console.error("Error deleting user:", error);

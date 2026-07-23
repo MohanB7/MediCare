@@ -83,7 +83,7 @@ const Signup = () => {
     try {
       // Send data to backend
       const response = await axios.post(
-        "http://localhost:5000/api/users/",
+        "https://medicare-1-nggy.onrender.com/api/users/",
         {
           fullName,
           email,
