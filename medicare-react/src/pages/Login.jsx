@@ -21,7 +21,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/api/users/login", {
+      const response = await axios.post("https://medicare-1-nggy.onrender.com/api/users/login", {
         email: email.trim(),
         password: password.trim()
       });
